@@ -14,7 +14,7 @@ const Player = (props) => {
 // Positions.props.posIndex
 
   const incrementPosition = () => {
-    console.log('called');
+    // console.log('called');
     if (currentPosition !== target) {
       let i = currentPosition + 1;
       i = i >= Positions.length ? 0: i;
@@ -30,6 +30,10 @@ const Player = (props) => {
     }
   } ,[props.position]);
 
+  // useEffect(()=>{
+  //   console.log('counted', props.count);
+  //   console.log
+  // },[props.count]);
 
   useEffect(()=>{
     if (currentPosition !== target) {
@@ -37,7 +41,10 @@ const Player = (props) => {
         incrementPosition();
       }, 500);
     } else {
-      props.setTargetReached(true);
+      // make the call that will do the DICE THING HERE
+      console.log('done');
+      props.setPlayerActive(false);
+      // props.setTargetReached(true);
       // setGameOn(true);
     }
   } ,[currentPosition, target]);

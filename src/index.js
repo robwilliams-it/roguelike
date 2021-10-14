@@ -3,7 +3,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './default/index.css';
 import App from './App';
+import SignIn from './components/login/index.js';
 
-ReactDOM.render( <App />, document.getElementById('root') );
+const reRender = () => {
+  ReactDOM.render( <App />, document.getElementById('root') );
+}
+
+ReactDOM.render( <SignIn reRender={reRender}/>, document.getElementById('root') );
+
 
 

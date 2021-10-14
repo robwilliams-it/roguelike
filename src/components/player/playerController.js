@@ -2,19 +2,19 @@ import Player from './player.js';
 import React, { useState, useEffect } from 'react';
 import Positions from './positions.js';
 
-const PlayerController = () =>{
-  const [players, setPlayers] = useState([0, 0]);
+const PlayerController = (props) =>{
+  const [playerPos, setPlayers] = useState(0);
   const [targetReached, setTargetReached] = useState(false);
   // const [playerPositions, setPlayerPostions] = useState([]);
 
   useEffect( ()=>{
-    const p = [...players];
-    p[0] += 1;
-    p[0] = p[0] > Positions.length - 1 ? 0 : p[0];
+    let p = playerPos;
+    p += 1;
+    p = p >= Positions.length - 1 ? p - Positions.length -1 : p;
     // setTimeout(() => {
     //   setPlayers(p);
     // }, 1000);
-  }, [players[0]]);
+  }, [playerPos]);
 
   useEffect(()=>{
     if (targetReached) {
@@ -25,9 +25,16 @@ const PlayerController = () =>{
     }
   },[targetReached]);
 
+  useEffect(()=>{
+    let i = props.count + playerPos;
+    let n = Positions.length;
+    i = i >= n ? i - n : i;
+    props.setPlayerActive(true);
+    setPlayers(i);
+  },[props.count]);
 
   return (
-    <Player position={players[0]} setTargetReached={setTargetReached}/>
+    <Player position={playerPos} setTargetReached={setTargetReached} setPlayerActive={props.setPlayerActive} playerActive={props.playerActive}/>
   )
 }
 
